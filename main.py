@@ -15,13 +15,12 @@ def test_connection():
 # Define a Task model
 class Task(BaseModel):
     title: str
-    description: str
-    completed: bool  # Always included so users can toggle True/False
+    completed: bool 
 
 # Create a new task
 @app.post("/tasks/")
 def create_task(task: Task):
-    data = {"title": task.title, "description": task.description, "completed": task.completed}
+    data = {"title": task.title, "completed": task.completed}
     response = supabase.table("tasks").insert(data).execute()
     
     if response.data:
